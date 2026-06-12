@@ -281,6 +281,42 @@ export default function PichangaDetalle() {
         </button>
       )}
 
+      {isAdmin && (
+        <div className="card">
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="font-semibold flex items-center gap-2">
+              Solicitudes para unirse
+              {pending.length > 0 && (
+                <span className="bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                  {pending.length}
+                </span>
+              )}
+            </h2>
+            <button onClick={load} className="text-xs text-blue-600 hover:underline">Actualizar</button>
+          </div>
+          {pending.length === 0 ? (
+            <p className="text-sm text-gray-400 py-2 text-center">No hay solicitudes pendientes</p>
+          ) : (
+            <div className="space-y-2">
+              {pending.map(s => (
+                <div key={s.id} className="flex items-center justify-between bg-orange-50 border border-orange-100 rounded-xl p-3">
+                  <div>
+                    <p className="font-medium text-sm">{s.jugadorNombre}</p>
+                    <p className="text-xs text-gray-400">
+                      {new Date(s.createdAt).toLocaleDateString('es-PE', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' })}
+                    </p>
+                  </div>
+                  <div className="flex gap-2">
+                    <button onClick={() => handleResolve(s.id, 'aprobar')} className="btn-green text-xs py-1.5 px-3">✓ Aprobar</button>
+                    <button onClick={() => handleResolve(s.id, 'rechazar')} className="btn-danger text-xs py-1.5 px-3">✗ Rechazar</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
       {/* Members list with inline validation */}
       {miembros.length > 0 && (
         <div className="card">
@@ -298,23 +334,6 @@ export default function PichangaDetalle() {
                 currentUserId={user?.userId}
                 onValidated={handleValidated}
               />
-            ))}
-          </div>
-        </div>
-      )}
-
-      {isAdmin && pending.length > 0 && (
-        <div className="card">
-          <h2 className="font-semibold mb-3">Solicitudes pendientes ({pending.length})</h2>
-          <div className="space-y-2">
-            {pending.map(s => (
-              <div key={s.id} className="flex items-center justify-between bg-gray-50 rounded-lg p-3">
-                <span className="font-medium text-sm">{s.jugadorNombre}</span>
-                <div className="flex gap-2">
-                  <button onClick={() => handleResolve(s.id, 'aprobar')} className="btn-green text-xs py-1 px-3">Aprobar</button>
-                  <button onClick={() => handleResolve(s.id, 'rechazar')} className="btn-danger text-xs py-1 px-3">Rechazar</button>
-                </div>
-              </div>
             ))}
           </div>
         </div>
