@@ -11,6 +11,7 @@ import PichangaDetalle from './pages/PichangaDetalle'
 import Editar from './pages/Editar'
 import JugadorPerfil from './pages/JugadorPerfil'
 import Jugadores from './pages/Jugadores'
+import Ayuda from './pages/Ayuda'
 
 function ProtectedRoute({ children }) {
   const { user } = useAuth()
@@ -40,6 +41,7 @@ export default function App() {
               <Route path="/pichangas/:id/editar" element={<ProtectedRoute><Editar /></ProtectedRoute>} />
               <Route path="/jugadores" element={<ProtectedRoute><Jugadores /></ProtectedRoute>} />
               <Route path="/jugadores/:id" element={<JugadorPerfil />} />
+              <Route path="/ayuda" element={<Ayuda />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </main>

@@ -34,12 +34,14 @@ export default function Navbar() {
             {link('/jugadores', 'Jugadores')}
             {link('/perfil', 'Perfil')}
             {link('/crear', '+ Nueva')}
+            {link('/ayuda', '?  Ayuda')}
             <button onClick={handleLogout} className="ml-2 px-3 py-1.5 rounded-lg text-sm font-medium text-blue-100 hover:bg-blue-700 transition-colors">
               Salir
             </button>
           </div>
         ) : (
           <div className="flex gap-2">
+            {link('/ayuda', '? Ayuda')}
             {link('/login', 'Ingresar')}
             {link('/register', 'Registrarse')}
           </div>
