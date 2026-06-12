@@ -125,6 +125,7 @@ export default function PichangaDetalle() {
   const [pending, setPending]     = useState([])
   const [loading, setLoading]     = useState(true)
   const [msg, setMsg]             = useState('')
+  const [copied, setCopied]       = useState(false)
 
   const isAdmin = pichanga?.adminId === user?.userId
 
@@ -207,8 +208,6 @@ export default function PichangaDetalle() {
   })
 
   const isMember = miembros.some(m => m.id === user?.userId)
-
-  const [copied, setCopied] = useState(false)
 
   function copyLink() {
     navigator.clipboard.writeText(window.location.href).then(() => {
